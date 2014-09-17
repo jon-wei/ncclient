@@ -186,7 +186,7 @@ class RPCReplyListener(SessionListener): # internal use
 
     def callback(self, root, raw):
         tag, attrs = root
-        if check_reply_tag(tag) is False:
+        if self.check_reply_tag(tag) is False:
             return
         for key in attrs: # in the <rpc-reply> attributes
             if key == "message-id": # if we found msgid attr
