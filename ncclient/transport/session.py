@@ -194,7 +194,7 @@ class HelloHandler(SessionListener):
 
     def callback(self, root, raw):
         tag, attrs = root
-        if tag == qualify("hello"):
+        if tag == qualify("hello") or tag == "hello":
             try:
                 id, capabilities = HelloHandler.parse(raw)
             except Exception as e:

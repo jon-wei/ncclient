@@ -176,9 +176,17 @@ class RPCReplyListener(SessionListener): # internal use
         with self._lock:
             self._id2rpc[id] = rpc
 
+    def check_reply_tag(self, tag):
+        if tag == qualify("rpc-reply") or tag == qualify("rpc-reply", BASE_NS_1_0_REPLY):
+            return True
+        if tag == "rpc-reply":
+            return True
+        else:
+            return False
+
     def callback(self, root, raw):
         tag, attrs = root
-        if tag != qualify("rpc-reply"):
+        if check_reply_tag(tag) is False:
             return
         for key in attrs: # in the <rpc-reply> attributes
             if key == "message-id": # if we found msgid attr

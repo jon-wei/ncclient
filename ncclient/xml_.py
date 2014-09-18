@@ -25,6 +25,7 @@ class XMLError(NCClientError): pass
 
 #: Base NETCONF namespace
 BASE_NS_1_0 = "urn:ietf:params:xml:ns:netconf:base:1.0"
+BASE_NS_1_0_REPLY = "urn:ietf:params:netconf:base:1.0"
 # NXOS_1_0
 NXOS_1_0 = "http://www.cisco.com/nxos:1.0"
 # NXOS_IF
@@ -57,8 +58,7 @@ for (ns, pre) in {
     FLOWMON_1_0: 'fm',
 }.items(): register_namespace(pre, ns)
 
-# qualify = lambda tag, ns=BASE_NS_1_0: tag if ns is None else "{%s}%s" % (ns, tag)
-qualify = lambda tag, ns=BASE_NS_1_0: tag
+qualify = lambda tag, ns=BASE_NS_1_0: tag if ns is None else "{%s}%s" % (ns, tag)
 """Qualify a *tag* name with a *namespace*, in :mod:`~xml.etree.ElementTree` fashion i.e. *{namespace}tagname*."""
 
 def to_xml(ele, encoding="UTF-8"):
